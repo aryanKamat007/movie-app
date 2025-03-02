@@ -6,16 +6,17 @@ import "./style.scss";
 const Genres = ({ data }) => {
     const { genres } = useSelector((state) => state.home);
 
+    if (!data || !genres) return null;
+
     return (
         <div className="genres">
-            {data?.map((g) => {
-                if (!genres[g]?.name) return;
-                return (
+            {data
+                .filter((g) => genres[g] && genres[g].name)
+                .map((g) => (
                     <div key={g} className="genre">
-                        {genres[g]?.name}
+                        {genres[g].name}
                     </div>
-                );
-            })}
+                ))}
         </div>
     );
 };
