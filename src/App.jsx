@@ -6,6 +6,7 @@ import { getApiConfiguration, getGenres } from "./store/homeSlice";
 
 import Header from "./components/header/Header";
 import Footer from "./components/footer/Footer";
+import SearchResult from "./pages/searchResult/SearchResult";
 import Home from "./pages/home/Home";
 
 function App() {
@@ -53,6 +54,9 @@ function App() {
   return (
     <BrowserRouter>
       <Header />
+      <Routes>
+      <Route path="/search/:query" element={<SearchResult />} />
+      </Routes>
       <Home />
     </BrowserRouter>
   );
