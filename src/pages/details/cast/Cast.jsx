@@ -1,3 +1,5 @@
+// Cast component to display top cast members of a movies 
+
 import React from "react";
 import { useSelector } from "react-redux";
 
