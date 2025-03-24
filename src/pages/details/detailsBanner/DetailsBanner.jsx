@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import dayjs from "dayjs";
@@ -11,13 +11,8 @@ import Genres from "../../../components/genres/Genres";
 import CircleRating from "../../../components/circleRating/CircleRating";
 import Img from "../../../components/lazyLoadImage/Img.jsx";
 import PosterFallback from "../../../assets/no-poster.png";
-import { PlayIcon } from "../Playbtn";
-import VideoPopup from "../../../components/videoPopup/VideoPopup";
 
-const DetailsBanner = ({ video, crew }) => {
-    const [show, setShow] = useState(false);
-    const [videoId, setVideoId] = useState(null);
-
+const DetailsBanner = ({ crew }) => {
     const { mediaType, id } = useParams();
     const { data, loading } = useFetch(`/${mediaType}/${id}`);
 
@@ -84,18 +79,6 @@ const DetailsBanner = ({ video, crew }) => {
                                                     1
                                                 )}
                                             />
-                                            <div
-                                                className="playbtn"
-                                                onClick={() => {
-                                                    setShow(true);
-                                                    setVideoId(video.key);
-                                                }}
-                                            >
-                                                <PlayIcon />
-                                                <span className="text">
-                                                    Watch Trailer
-                                                </span>
-                                            </div>
                                         </div>
 
                                         <div className="overview">
@@ -153,9 +136,7 @@ const DetailsBanner = ({ video, crew }) => {
                                                     {director?.map((d, i) => (
                                                         <span key={i}>
                                                             {d.name}
-                                                            {director.length -
-                                                                1 !==
-                                                                i && ", "}
+                                                            {director.length - 1 !== i && ", "}
                                                         </span>
                                                     ))}
                                                 </span>
@@ -171,9 +152,7 @@ const DetailsBanner = ({ video, crew }) => {
                                                     {writer?.map((d, i) => (
                                                         <span key={i}>
                                                             {d.name}
-                                                            {writer.length -
-                                                                1 !==
-                                                                i && ", "}
+                                                            {writer.length - 1 !== i && ", "}
                                                         </span>
                                                     ))}
                                                 </span>
@@ -203,12 +182,6 @@ const DetailsBanner = ({ video, crew }) => {
                                         )}
                                     </div>
                                 </div>
-                                <VideoPopup
-                                    show={show}
-                                    setShow={setShow}
-                                    videoId={videoId}
-                                    setVideoId={setVideoId}
-                                />
                             </ContentWrapper>
                         </React.Fragment>
                     )}
