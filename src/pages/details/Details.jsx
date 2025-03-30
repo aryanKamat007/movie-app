@@ -5,6 +5,7 @@ import "./style.scss";
 import useFetch from "../../hooks/useFetch";
 import DetailsBanner from "./detailsBanner/DetailsBanner";
 import Cast from "./cast/Cast";
+import Recommendation from "./carousels/Recommendation";
 
 const Details = () => {
     const { mediaType, id } = useParams();
@@ -17,6 +18,8 @@ const Details = () => {
         <div>
             <DetailsBanner crew={credits?.crew} />
             <Cast data={credits?.cast} loading={creditsLoading} />
+            <Recommendation mediaType={mediaType} id={id} />
+            
         </div>
     );
 };
