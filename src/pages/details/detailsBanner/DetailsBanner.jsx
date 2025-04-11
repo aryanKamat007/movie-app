@@ -15,23 +15,17 @@ import VideoPopup from "../../../components/videoPopup/VideoPopup";
 import PosterFallback from "../../../assets/no-poster.png";
 
 const providerDomains = {
-  Netflix: "netflix.com",
-  "Amazon Prime Video": "primevideo.com",
-  "Disney Plus": "hotstar.com",         
-  JioCinema: "jiocinema.com",
-  ZEE5: "zee5.com",
-  "Sony Liv": "sonyliv.com",
-  "Apple TV+": "tv.apple.com",
+  "Netflix": "https://www.netflix.com",
+  "Amazon Prime Video": "https://www.primevideo.com",
+  "JioHotstar": "https://www.hotstar.com/in/home",
+  "Zee5": "https://www.zee5.com",
+  "Sony Liv": "https://www.sonyliv.com",
+  "Apple TV+": "https://tv.apple.com",
 };
 
-const getProviderSearchUrl = (providerName, title) => {
-  const domain = providerDomains[providerName];
-  if (!domain) return "#";
-  return `https://www.google.com/search?q=${encodeURIComponent(
-    title
-  )}+site:${domain}`;
+const getProviderUrl = (providerName) => {
+  return providerDomains[providerName] || "#";
 };
-
 const DetailsBanner = ({ crew }) => {
   const [show, setShow] = useState(false);
   const [videoId, setVideoId] = useState(null);
@@ -208,10 +202,7 @@ const DetailsBanner = ({ crew }) => {
                             <a
                                 key={i}
                                 className="provider"
-                                href={getProviderSearchUrl(
-                                provider.provider_name,
-                                data.title || data.name
-                                )}
+                                href={getProviderUrl(provider.provider_name)}
                                 target="_blank"
                                 rel="noopener noreferrer"
                             >
