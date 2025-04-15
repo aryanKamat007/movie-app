@@ -15,10 +15,10 @@ import VideoPopup from "../../../components/videoPopup/VideoPopup";
 import PosterFallback from "../../../assets/no-poster.png";
 
 const providerDomains = {
-  "Netflix": "https://www.netflix.com",
+  Netflix: "https://www.netflix.com",
   "Amazon Prime Video": "https://www.primevideo.com",
-  "JioHotstar": "https://www.hotstar.com/in/home",
-  "Zee5": "https://www.zee5.com",
+  JioHotstar: "https://www.hotstar.com/in/home",
+  Zee5: "https://www.zee5.com",
   "Sony Liv": "https://www.sonyliv.com",
   "Apple TV+": "https://tv.apple.com",
 };
@@ -34,7 +34,6 @@ const DetailsBanner = ({ crew }) => {
   const { data, loading } = useFetch(`/${mediaType}/${id}`);
   const { data: videos } = useFetch(`/${mediaType}/${id}/videos`);
   console.log("Fetched videos:", videos?.results);
-  
 
   const { data: watchProvidersData } = useFetch(
     `/${mediaType}/${id}/watch/providers`
@@ -50,9 +49,7 @@ const DetailsBanner = ({ crew }) => {
   );
 
   const creators =
-    mediaType === "tv" && data?.created_by?.length > 0
-      ? data.created_by
-      : [];
+    mediaType === "tv" && data?.created_by?.length > 0 ? data.created_by : [];
 
   const toHoursAndMinutes = (totalMinutes) => {
     const hours = Math.floor(totalMinutes / 60);
@@ -72,9 +69,9 @@ const DetailsBanner = ({ crew }) => {
     ) ||
     videos?.results?.find((v) => v.type === "Teaser" && v.site === "YouTube");
 
-    console.log("Selected trailer:", trailer);
+  console.log("Selected trailer:", trailer);
 
-  const country = "IN"; 
+  const country = "IN";
   const providers = watchProvidersData?.results?.[country]?.flatrate || [];
 
   return (
@@ -166,10 +163,8 @@ const DetailsBanner = ({ crew }) => {
                             (d, i) => (
                               <span key={i}>
                                 {d.name}
-                                {(mediaType === "tv"
-                                  ? creators
-                                  : director
-                                ).length -
+                                {(mediaType === "tv" ? creators : director)
+                                  .length -
                                   1 !==
                                   i && ", "}
                               </span>
@@ -193,33 +188,36 @@ const DetailsBanner = ({ crew }) => {
                       </div>
                     )}
                     {providers.length > 0 && (
-                    <div className="info">
+                      <div className="info">
                         <span className="text bold">Available On: </span>
                         <div className="watch-providers">
-                        {providers.map((provider, i) => {
-                            console.log("TMDb provider name:", provider.provider_name);
+                          {providers.map((provider, i) => {
+                            console.log(
+                              "TMDb provider name:",
+                              provider.provider_name
+                            );
                             return (
-                            <a
+                              <a
                                 key={i}
                                 className="provider"
                                 href={getProviderUrl(provider.provider_name)}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                            >
+                              >
                                 <Img
-                                src={
+                                  src={
                                     provider.logo_path
-                                    ? `https://image.tmdb.org/t/p/w500${provider.logo_path}`
-                                    : PosterFallback
-                                }
-                                alt={provider.provider_name}
+                                      ? `https://image.tmdb.org/t/p/w500${provider.logo_path}`
+                                      : PosterFallback
+                                  }
+                                  alt={provider.provider_name}
                                 />
                                 <span>{provider.provider_name}</span>
-                            </a>
+                              </a>
                             );
-                        })}
+                          })}
                         </div>
-                    </div>
+                      </div>
                     )}
                   </div>
                 </div>
