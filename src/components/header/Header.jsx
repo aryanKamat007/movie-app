@@ -65,6 +65,8 @@ const Header = () => {
             <ContentWrapper>
                 <div className="logo" onClick={() => navigate("/")}> 
                     <img src={logo} alt="Movix Logo" />
+                    <span style={{color: "white", height: "50px", margin: "10px",padding: "15px 5px 10px 5px", position: "absolute",
+                        fontWeight:"500"}}>Aryan's Persistent Internship Project</span>
                 </div>
                 <ul className="menuItems">
                     <li className="menuItem" onClick={() => navigate("/explore/movie")}>Movies</li>
